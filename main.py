@@ -109,11 +109,13 @@ def compute():
 
     max = np.max(magnitude)
 
+    gridImageFT = np.copy(imageFT)
+
     # Zero the components that are less than 40% of the max
 
     print '3. removing low-magnitude components'
     threshold = max * 0.4
-    magnitude[magnitude < threshold] = 0
+    gridImageFT[magnitude < threshold] = 0
 
     if gridImageFT is None:
         gridImageFT = np.zeros((height, width), dtype=np.complex_)
@@ -130,12 +132,17 @@ def compute():
 
     print '5. inverse FT'
 
+    gridImage = inverseFT(gridImageFT)
+
     if gridImage is None:
         gridImage = np.zeros((height, width), dtype=np.complex_)
 
     # Remove grid image from original image
 
     print '6. remove grid'
+    resultImage = np.copy(image)
+
+    resultImage[gridImage > 16] = 0
 
     if resultImage is None:
         resultImage = image.copy()
