@@ -147,10 +147,12 @@ def compute():
 
 # File dialog
 
-import Tkinter, tkFileDialog
 
-root = Tkinter.Tk()
-root.withdraw()
+##### Comment out on MacOS #####
+# import Tkinter, tkFileDialog
+#
+# root = Tkinter.Tk()
+# root.withdraw()
 
 
 # Do a forward FT
@@ -430,15 +432,16 @@ def keyboard(key, x, y):
         sys.exit(0)
 
     elif key == 'i':
-
-        imagePath = tkFileDialog.askopenfilename(initialdir=imageDir)
-        if imagePath:
-            image = loadImage(imagePath)
-            imageFilename = os.path.basename(imagePath)
-            imageFT = None
-            gridImage = None
-            gridImageFT = None
-            resultImage = None
+        pass
+        ##### Comment out on MacOS #####
+        # imagePath = tkFileDialog.askopenfilename(initialdir=imageDir)
+        # if imagePath:
+        #     image = loadImage(imagePath)
+        #     imageFilename = os.path.basename(imagePath)
+        #     imageFT = None
+        #     gridImage = None
+        #     gridImageFT = None
+        #     resultImage = None
 
     elif key == 'm':
         showMagnitude = not showMagnitude
@@ -451,7 +454,7 @@ def keyboard(key, x, y):
         translate = (0, 0)
 
     elif key == 'c':  # compute
-        image, lines = compute()
+        resultImage, lines = compute()
         print 'Grid lines:'
         for line in lines:
             print '  angle %.1f, distance %d' % (line[0], line[1])
@@ -759,11 +762,11 @@ command-line arguments:
 
 else:
     # Run OpenGL
-
-    image, lines = compute()
-    print 'Grid lines:'
-    for line in lines:
-        print '  angle %.1f, distance %d' % (line[0], line[1])
+    #
+    # image, lines = compute()
+    # print 'Grid lines:'
+    # for line in lines:
+    #     print '  angle %.1f, distance %d' % (line[0], line[1])
 
     glutInit()
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB)
